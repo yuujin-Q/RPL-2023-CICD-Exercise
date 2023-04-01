@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: executing remote ssh commands using password
+    - name: create folder for copying file
       uses: appleboy/ssh-action@v0.1.8
       with:
         host: ${{ secrets.HOST }}
@@ -26,11 +26,19 @@ jobs:
         port: ${{ secrets.PORT }}
         source: "app.py"
         target: "/home/rplcicd/13512043/"
-    - name: executing remote ssh commands using password
+    - name: kill existing flask app
       uses: appleboy/ssh-action@v0.1.8
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: cd /home/rplcicd/13512043 && pkill -f 12043 && python3 -m flask run --host=0.0.0.0 --port=12043 & 
+        script: pkill -f 12043
+    - name: start flask app
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: cd /home/rplcicd/13512043 && python3 -m flask run --host=0.0.0.0 --port=12043 & 
