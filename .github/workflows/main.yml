@@ -33,7 +33,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: pkill -f 12043 || true
+        script: ps -ef | grep 12043 | grep python3  | awk '{print $2}' | xargs kill -9 $1 || true
     - name: start flask app
       uses: appleboy/ssh-action@v0.1.8
       with:
