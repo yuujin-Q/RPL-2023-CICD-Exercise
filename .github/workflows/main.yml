@@ -27,13 +27,14 @@ jobs:
         source: "app.py"
         target: "/home/rplcicd/13512043/"
     - name: kill existing flask app
+      continue-on-error: true
       uses: appleboy/ssh-action@v0.1.8
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: ps -ef | grep 12043 | grep python3  | awk '{print $2}' | xargs kill -9 $1 || true
+        script: pkill -f 12043
     - name: start flask app
       uses: appleboy/ssh-action@v0.1.8
       with:
