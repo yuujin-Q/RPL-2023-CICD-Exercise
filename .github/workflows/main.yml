@@ -4,19 +4,16 @@ on:
     branches:
     - main
 jobs:
-  code-checking:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Do python linter test check
-        run: |
-          python -m ensurepip --upgrade
-          python -m pip install pylint
-          pylint app.py
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: Do python linter test check
+      run: |
+        apt install python3-pip -y
+        python -m pip install pylint
+        pylint app.py
     - name: create folder for copying file
       uses: appleboy/ssh-action@v0.1.8
       with:
