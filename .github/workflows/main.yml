@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@master
     - name: Do python linter test check
       run: |
-        apt install python3-pip -y
+        sudo apt install python3-pip -y
         python -m pip install pylint
         pylint app.py
     - name: create folder for copying file
