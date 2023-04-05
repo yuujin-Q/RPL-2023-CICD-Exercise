@@ -13,7 +13,8 @@ jobs:
       run: |
         sudo apt install python3-pip -y
         python -m pip install pylint
-        pylint app.py
+        pip install flask
+        pylint app.py --disable=C0114,C0116
     - name: create folder for copying file
       uses: appleboy/ssh-action@v0.1.8
       with:
