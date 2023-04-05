@@ -48,4 +48,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: cd /home/rplcicd/13512043 && python3 -m flask run --host=0.0.0.0 --port=12043 & 
+        script: cd /home/rplcicd/13512043 && nohup python3 -m flask run --host=0.0.0.0 --port=12043 & 
